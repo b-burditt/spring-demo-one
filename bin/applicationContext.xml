@@ -7,18 +7,41 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
+	<!-- load the properties file: sport.properties by giving it the file path -->
+	<context:property-placeholder location="classpath:sport.properties"/>
+	
 	
     <!-- Define your beans here -->
     
-    <bean 
-        id="myCoach"
-        class="com.brian.springdemo.DodgeballCoach">
+    <!-- holds default fortuneService used throughout app -->
+    <bean id="myFortuneService"
+    	class="${foo.fortuneService}">
     </bean>
-   
-
+    	
+   	<!-- holds default coach used throughout app -->
+    <bean id="myCoach"
+        class="com.brian.springdemo.TrackCoach">
+        
+        <!-- set up constructor injection, add in id of bean used  -->
+        <!-- in this case, it will call the constructor for myCoach with myFortune as a parameter value -->
+        <constructor-arg ref="myFortuneService" />
+    </bean>
+    
+    <!-- default coach with no-arg constructor -->
+    <bean id="myNoArgCoach"
+    	class="com.brian.springdemo.CricketCoach">
+    	
+    	<!-- set up setter injection -->
+    	<!-- the property is the name of the setter (fortuneService = getFortuneService) -->
+    	<!-- the reference is the bean that will be passed in, which is defined above -->
+    	<property name="fortuneService" ref="myFortuneService" />
+    	
+    	<!-- in this injection, we used a value instead of a ref, since we are giving it a literal value -->
+    	<!-- the $ and {} tell spring that we are getting this value from our properties file, foo.email references what it was named in the properties file -->
+    	<property name="emailAddress" value="${foo.email}" />
+    	
+    	<!-- just like above, inject the setter and value from properties file -->
+    	<property name="team" value="${foo.team}" />
+   	</bean>
+  
 </beans>
-
-
-
-
-
