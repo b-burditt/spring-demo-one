@@ -1,22 +1,17 @@
 package com.brian.springdemo;
 
-public class TrackCoach implements Coach 
+public class TrackCoach extends Coach
 {
-	private FortuneService fortuneService;
-	private String team;
-	private String emailAddress;
-	
-	//default constructor, right now it's just a temporary fix
+	//no arg constructor
 	public TrackCoach()
 	{
-		System.out.println("TrackCoach: inside no-arg constructor.");
+		System.out.println("Coach: inside no-arg constructor.");
 	}
-	
-	public TrackCoach(FortuneService fortuneService) 
+	//constructor with fortuneService
+	public TrackCoach(FortuneService theFortuneService)
 	{
-		this.fortuneService = fortuneService;
+		fortuneService = theFortuneService;
 	}
-
 	@Override
 	public String getDailyWorkout() 
 	{
@@ -27,29 +22,5 @@ public class TrackCoach implements Coach
 	public String getDailyFortune() 
 	{
 		return "Just do it: " + fortuneService.getFortune();
-	}
-	
-	public void setFortuneService(FortuneService service)
-	{
-		System.out.println("TrackCoach: inside setter method - setFortuneService");
-		fortuneService = service;
-	}
-	public void setEmailAddress(String address)
-	{
-		System.out.println("TrackCoach: inside setter method - setEmailAddress");
-		emailAddress = address;
-	}
-	public String getEmailAddress()
-	{
-		return emailAddress;
-	}
-	public void setTeam(String teamName)
-	{
-		System.out.println("TrackCoach: inside setter method - setTeam");
-		team = teamName;
-	}
-	public String getTeam()
-	{
-		return team;
 	}
 }

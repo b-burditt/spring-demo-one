@@ -1,19 +1,16 @@
 package com.brian.springdemo;
 
-public class CricketCoach implements Coach 
+public class CricketCoach extends Coach
 {
-	private String emailAddress;
-	private String team;
-	private FortuneService fortuneService;
-	
+	//no arg constructor
 	public CricketCoach()
 	{
-		System.out.println("CricketCoach: inside no-arg constructor.");
+		System.out.println("Coach: inside no-arg constructor.");
 	}
-	
-	public CricketCoach(FortuneService myFortuneService)
+	//constructor with fortuneService
+	public CricketCoach(FortuneService theFortuneService)
 	{
-		fortuneService = myFortuneService;
+		fortuneService = theFortuneService;
 	}
 	@Override
 	public String getDailyWorkout() 
@@ -24,30 +21,5 @@ public class CricketCoach implements Coach
 	public String getDailyFortune() 
 	{
 		return fortuneService.getFortune();
-	}
-
-	public void setFortuneService(FortuneService service)
-	{
-		System.out.println("CricketCoach: inside setter method - setFortuneService");
-		fortuneService = service;
-	}
-	public void setEmailAddress(String address)
-	{
-		System.out.println("CricketCoach: inside setter method - setEmailAddress");
-		emailAddress = address;
-	}
-	public String getEmailAddress()
-	{
-		return emailAddress;
-	}
-	public void setTeam(String teamName)
-	{
-		System.out.println("CricketCoach: inside setter method - setTeam");
-		team = teamName;
-	}
-	public String getTeam()
-	{
-		return team;
-	}
-	
+	}	
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	
+    <!-- Define your beans here -->
+    
+    <!-- holds default fortuneService used throughout app -->
+    <bean id="myFortuneService"
+    	class="com.brian.springdemo.HappyFortuneService">
+    </bean>
+    	
+   	<!-- holds default coach used throughout app -->
+    <bean id="myCoach"
+        class="com.brian.springdemo.TrackCoach"
+        init-method="doMyStartupStuff"
+        destroy-method="doMyCleanupStuff">
+        
+        <!-- set up constructor injection, add in id of bean used  -->
+        <!-- in this case, it will call the constructor for myCoach with myFortune as a parameter value -->
+        <constructor-arg ref="myFortuneService" />
+    </bean>
+  
+</beans>
